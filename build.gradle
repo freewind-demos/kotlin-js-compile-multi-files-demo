@@ -1,7 +1,8 @@
 buildscript {
-    ext.kotlin_version = '1.2.41'
+    ext.kotlin_version = '1.2.50'
     repositories {
-        mavenCentral()
+        mavenLocal()
+        jcenter()
         maven { url("https://plugins.gradle.org/m2/") }
     }
     dependencies {
@@ -10,20 +11,30 @@ buildscript {
 
 }
 
-apply plugin: 'kotlin2js'
+allprojects {
 
-compileKotlin2Js {
-    kotlinOptions.outputFile = "${projectDir}/generated/hello.js"
+    apply plugin: 'kotlin2js'
+
+    compileKotlin2Js {
+        kotlinOptions.outputFile = "${projectDir}/generated/hello.js"
+    }
+
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+        testCompile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
+    }
+
 }
 
-repositories {
-    mavenLocal()
-    jcenter()
-}
-
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
-    testCompile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
+subprojects {
+    dependencies {
+        compile rootProject
+    }
 }
 
 task wrapper(type: Wrapper) {

@@ -1,8 +1,11 @@
-Kotlin JS Hello World Demo
-=======================
+Kotlin JS Multi Projects Demo
+=============================
 
-Hello world from kotlin-js.
+There are two projects:
+- root project
+- sub project: `project1`
 
+And `project1` depends on the root project.
 
 Run:
 
@@ -11,6 +14,4 @@ Run:
 open index.html
 ```
 
-You will see "Hello, Kotlin!" in console of your browser's developer panel.
-
-
+See the console and find the output from two js files.
